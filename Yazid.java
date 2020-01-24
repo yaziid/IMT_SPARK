@@ -66,6 +66,10 @@ public class Yazid {
 				 select(sum(when(new Column("quantity").$less(500), new Column("quantity").multiply(0.1)).
 						 when(new Column("quantity").$greater$eq(500), new Column("quantity").$minus(500).multiply(0.2).$plus(500*0.1))));
 		 
+		 		 //Question 7 T4
+		 Dataset<Row> transaction_resource3 = transaction.join(resource, transaction.col("resourceId").equalTo(resource.col("resourceId")), "inner").
+				 select(lit(10000).divide(count(new Column("transactionId")))).where(new Column("artist").equalTo(NAME));
+		 
 		 transaction_resource.show();
 
 	     
