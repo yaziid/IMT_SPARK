@@ -55,7 +55,10 @@ public class Yazid {
 		 //Question 4
 		 Dataset<Row> transaction_resource = transaction.join(resource, transaction.col("resourceId").equalTo(resource.col("resourceId")), "inner").where(new Column("artist").equalTo("Yazid")).select(sum(new Column("quantity")).multiply(0.15));
 		 
-		 
+		 		 //Question 5 T2
+		 Dataset<Row> transaction_resource1 = transaction.join(resource, transaction.col("resourceId").equalTo(resource.col("resourceId")), "inner").where(new Column("artist").equalTo("Yazid"))
+				 .select(sum(when(new Column("quantity").$less(500), new Column("quantity").multiply(0.10)
+								 ).when(new Column("quantity").$greater$eq(500), new Column("quantity").multiply(0.20))));
 		 
 		 transaction_resource.show();
 
